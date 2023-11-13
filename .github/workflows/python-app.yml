@@ -36,10 +36,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Set secrets as environment secrets
       env:
-        SETLIST_API_KEY: ${{secrets.SETLIST_API_KEY}}
-        SETLIST_BASE_URL: ${{secrets.SETLIST_BASE_URL}}
+        SETLIST_API_KEY: ${secrets.SETLIST_API_KEY}
+        SETLIST_BASE_URL: ${secrets.SETLIST_BASE_URL}
         SPOTIFY_CLIENT_ID: ${secrets.SPOTIFY_CLIENT_ID}
         SPOTIFY_SECRET_ID: ${secrets.SPOTIFY_SECRET_ID}
         SPOTIFY_REDIRECT_URI: ${secrets.SPOTIFY_REDIRECT_URI}
       run: |
-        python main.py
+        python main.py "Radiohead" "Passeio Marítimo de Algés" "2016"
