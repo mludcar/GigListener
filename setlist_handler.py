@@ -1,8 +1,7 @@
 import requests
 import logging
 import sys
-from constraints import SETLIST_BASE_URL, SETLIST_API_KEY
-
+import os
 
 # Test purpouse only
 band = 'Radiohead'
@@ -21,13 +20,13 @@ def transform_to_url(str):
 
 # Generate request url
 def generate_setlist_url(band, place, year):
-    return f'{SETLIST_BASE_URL}/search/setlists?artistName={band}&venueName={place}&year={year}'
+    return f"{os.environ['SETLIST_BASE_URL']}/search/setlists?artistName={band}&venueName={place}&year={year}"
 
 # Realizamos la request
 def get_setlist_response(url):
     logging.info("Connecting to Setlist...")
     session = requests.Session()
-    session.headers.update({'x-api-key': SETLIST_API_KEY, 'Accept': 'application/json'})
+    session.headers.update({'x-api-key': os.environ['SETLIST_API_KEY'], 'Accept': 'application/json'})
     return session.get(url)
 
 # Take the response and get your setlist
