@@ -1,7 +1,7 @@
 import spotipy
 import logging
+import os
 from spotipy.oauth2 import SpotifyOAuth
-from constraints import SPOTIFY_CLIENT_ID, SPOTIFY_SECRET_ID, SPOTIFY_REDIRECT_URI
 
 def main():
     sp = get_spotify_authentication()
@@ -14,7 +14,7 @@ def main():
 # Create spotify connection
 def get_spotify_authentication():
     logging.info("Connecting with Spotify...")
-    sp_oauth = SpotifyOAuth(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_SECRET_ID, redirect_uri=SPOTIFY_REDIRECT_URI, scope="playlist-modify-private")
+    sp_oauth = SpotifyOAuth(client_id=os.environ.get('SPOTIFY_CLIENT_ID'), client_secret=os.environ.get('SPOTIFY_SECRET_ID'), redirect_uri=os.environ.get('SPOTIFY_REDIRECT_URI'), scope="playlist-modify-private")
     return spotipy.Spotify(auth_manager=sp_oauth)
 
 # Reproduction List Name only for testing pourpose
